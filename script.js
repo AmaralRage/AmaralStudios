@@ -163,21 +163,36 @@ checkoutBtn.addEventListener("click", function () {
     }
 
     let total = 0;
-    const cartItems = cart.map((item) => {
+    const cartItems = cart.map((item, index) => {
         const itemTotal = item.price * item.quantity;
         total += itemTotal;
+
         return (
-            ` ${item.name} Quantidade: (${item.quantity}) Preço: R$${item.price.toFixed(2)} Valor total: R$${total.toFixed(2)} |`
+            `${item.name}\n` +
+            `(R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })})\n` +
+            `Quantidade: ${item.quantity}\n` +
+            `R$ ${itemTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
+            `*________________________________*\n`
         );
-    }).join("");
+    }).join("\n");
 
-    const message = encodeURIComponent(cartItems)
-    const phone = "+5521983837957"
+    const message = encodeURIComponent(
+        `Golden Burguer\n\n` +  // Nome do estabelecimento
+        `${cartItems}\n` +  // Itens do carrinho formatados
+        `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
+        `Entrega: Local\n` +
+        `Total: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+        `Venha conhecer nosso Instagram\n` +
+        `https://www.instagram.com/goldenburgerrj/\n\n` +
+        `Endereço: ${addressInput.value}` // Endereço do cliente
+    );
 
-    window.open(`https://wa.me/${phone}?text=${message} Endereço: ${addressInput.value}`, "_blank")
+    const phone = "+5521983837957";
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
     cart = [];
     updateCartModal();
+
 })
 
 function verificaAberto() {
