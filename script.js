@@ -172,19 +172,18 @@ checkoutBtn.addEventListener("click", function () {
             `(R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })})\n` +
             `Quantidade: ${item.quantity}\n` +
             `R$ ${itemTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
-            `*________________________________*\n`
+            `\n`
         );
     }).join("\n");
 
     const message = encodeURIComponent(
-        `Golden Burguer\n\n` +  // Nome do estabelecimento
-        `${cartItems}\n` +  // Itens do carrinho formatados
-        `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
-        `Entrega: Local\n` +
-        `Total: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+        `*Golden Burguer*\n\n` +
+        `${cartItems}\n` + 
+        // `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
+        `*Total: R$* ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
         `Venha conhecer nosso Instagram\n` +
         `https://www.instagram.com/goldenburgerrj/\n\n` +
-        `Endereço: ${addressInput.value}` // Endereço do cliente
+        `*Endereço:* ${addressInput.value}` // Endereço do cliente
     );
 
     const phone = "+5521983837957";
