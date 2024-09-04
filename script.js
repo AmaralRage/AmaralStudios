@@ -40,19 +40,59 @@ menu.addEventListener("click", function (event) {
 })
 
 function addToCart(name, price) {
-    const existingItem = cart.find(item => item.name === name)
+    const isOpen = verificaAberto();
+
+    if (!isOpen) {
+        Toastify({
+            text: "Desculpe, estamos fechados no momento!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#FF0000", // Vermelho
+            },
+        }).showToast();
+        return;
+    }
+
+    const existingItem = cart.find(item => item.name === name);
 
     if (existingItem) {
         existingItem.quantity += 1;
 
-    } else {
+        Toastify({
+            text: "O item foi adicionado ao carrinho!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#228B22", // Verde
+            },
+        }).showToast();
 
+    } else {
         cart.push({
             name,
             price,
             quantity: 1,
-        })
-        updateCartModal()
+        });
+        updateCartModal();
+
+        Toastify({
+            text: "O item foi adicionado ao carrinho!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#228B22", // Verde
+            },
+        }).showToast();
     }
 }
 
