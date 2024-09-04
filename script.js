@@ -94,6 +94,10 @@ function addToCart(name, price) {
             },
         }).showToast();
     }
+    // Adiciona a vibração ao final da função
+    if (navigator.vibrate) {
+        navigator.vibrate(200); // Vibra por 200ms
+    }
 }
 
 function updateCartModal() {
