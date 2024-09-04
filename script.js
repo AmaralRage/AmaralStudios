@@ -72,7 +72,7 @@ function updateCartModal() {
                     <p class="font-medium mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
             
-                <button class="remove-from-cart-btn bg-neutral-500 text-white px-4 py-1 rounded" data-name="${item.name}">
+                <button class="remove-from-cart-btn bg-stone-600 text-white px-4 py-1 rounded" data-name="${item.name}">
                     Remover
                 </button>
         </div>
@@ -178,7 +178,7 @@ checkoutBtn.addEventListener("click", function () {
 
     const message = encodeURIComponent(
         `*Golden Burguer*\n\n` +
-        `${cartItems}\n` + 
+        `${cartItems}\n` +
         // `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
         `*Total: R$* ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
         `Venha conhecer nosso Instagram\n` +
