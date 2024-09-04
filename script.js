@@ -94,9 +94,11 @@ function addToCart(name, price) {
             },
         }).showToast();
     }
-    // Adiciona a vibração ao final da função
+
     if (navigator.vibrate) {
-        navigator.vibrate(200); // Vibra por 200ms
+        navigator.vibrate(500);
+    } else {
+        console.log("Vibração não suportada neste dispositivo/navegador.");
     }
 }
 
