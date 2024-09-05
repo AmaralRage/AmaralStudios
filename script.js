@@ -225,10 +225,10 @@ checkoutBtn.addEventListener("click", function () {
     const message = encodeURIComponent(
         `*Golden Burguer*\n\n` +
         `${cartItems}\n` +
-        // `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
         `*Total:* R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+        `*Endereço:* ${addressInput.value}\n` + // Endereço do cliente
+        `----------------------------------------------------\n` + // Linha de separação
         `Venha conhecer nosso Instagram\n` +
-        `*Endereço:* ${addressInput.value}` + // Endereço do cliente
         `https://www.instagram.com/goldenburgerrj/\n\n`
     );
 
