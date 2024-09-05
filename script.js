@@ -226,10 +226,10 @@ checkoutBtn.addEventListener("click", function () {
         `*Golden Burguer*\n\n` +
         `${cartItems}\n` +
         // `Subtotal: R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
-        `*Total: R$* ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
+        `*Total:* R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
         `Venha conhecer nosso Instagram\n` +
-        `https://www.instagram.com/goldenburgerrj/\n\n` +
-        `*Endereço:* ${addressInput.value}` // Endereço do cliente
+        `*Endereço:* ${addressInput.value}` + // Endereço do cliente
+        `https://www.instagram.com/goldenburgerrj/\n\n`
     );
 
     const phone = "+5521983837957";
@@ -242,7 +242,12 @@ checkoutBtn.addEventListener("click", function () {
 
 function verificaAberto() {
     const data = new Date();
+    const diaDaSemana = data.getDay();
     const hora = data.getHours();
+
+    if (diaDaSemana === 2) {
+        return false;
+    }
     return (hora >= 18 && hora < 24) || (hora >= 0 && hora < 1);
 }
 
