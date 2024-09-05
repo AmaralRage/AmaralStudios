@@ -96,7 +96,7 @@ function addToCart(name, price) {
     }
 
     if (navigator.vibrate) {
-        navigator.vibrate(300);
+        navigator.vibrate(200);
     } else {
         console.log("Vibração não suportada neste dispositivo/navegador.");
     }
