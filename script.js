@@ -61,6 +61,7 @@ function addToCart(name, price) {
 
     if (existingItem) {
         existingItem.quantity += 1;
+        cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
 
         Toastify({
             text: "O item foi adicionado ao carrinho!",
@@ -141,7 +142,8 @@ function updateCartModal() {
         currency: "BRL"
     });
 
-    cartCounter.innerHTML = cart.length;
+    cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
+
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
@@ -192,7 +194,7 @@ checkoutBtn.addEventListener("click", function () {
             position: "right",
             stopOnFocus: true,
             style: {
-                background: "#EF4444",
+                background: "#FF0000",
             },
         }).showToast();
 
@@ -233,10 +235,29 @@ checkoutBtn.addEventListener("click", function () {
     );
 
     const phone = "+5521983837957";
-    window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
 
-    cart = [];
+    // Desabilitar o botão de checkout usando o ID
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.setAttribute('disabled', 'disabled');
+    }
+
+    Swal.fire({
+        title: 'Obrigado!',
+        text: 'Seu pedido foi finalizado com sucesso.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+        timer: 5000, 
+        timerProgressBar: true,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    })
+    setTimeout(() => {
+        window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
+    }, 2500); // Atraso de 500 milissegundos (0.5 segundos)
     updateCartModal();
+
 
 })
 
