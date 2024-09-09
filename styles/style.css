@@ -6,3 +6,37 @@
 body {
     background-color: #F5F5F5;
 }
+
+.swal2-container {
+    font-family: 'Poppins', sans-serif;
+}
+
+.swal2-popup {
+    background-color: #191919;
+}
+
+.swal2-title {
+    color: #ffd700;
+}
+
+.swal2-text {
+    color: #ffd700;
+}
+
+.swal2-confirm {
+    background-color: #ffd700;
+    color: white;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring {
+    border-color: #ffd700;
+    color: yellow;
+}
+
+#swal2-html-container {
+    color: #ffd700;
+}
+
+.swal2-icon.swal2-success .swal2-success-line {
+    background-color: #ffd700;
+}

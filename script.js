@@ -9,6 +9,23 @@ const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
 
+// Selecione todos os botões de adicionar ao carrinho
+const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+// Adicione um evento de clique a cada botão
+addToCartButtons.forEach(button => {
+    button.addEventListener('click', function () {
+        const name = this.getAttribute('data-name');
+        const price = parseFloat(this.getAttribute('data-price'));
+        const image = this.getAttribute('data-image'); // Pega a URL da imagem
+
+        // Chama a função addToCart com os parâmetros do item
+        addToCart(name, price, image);
+    });
+});
+
+
+
 let cart = [];
 
 // abrir modal
@@ -34,12 +51,10 @@ menu.addEventListener("click", function (event) {
     if (parentButton) {
         const name = parentButton.getAttribute("data-name")
         const price = parseFloat(parentButton.getAttribute("data-price"))
-
-        addToCart(name, price)
     }
 })
 
-function addToCart(name, price) {
+function addToCart(name, price, image) { // Adicione o parâmetro "image"
     const isOpen = verificaAberto();
 
     if (!isOpen) {
@@ -61,40 +76,28 @@ function addToCart(name, price) {
 
     if (existingItem) {
         existingItem.quantity += 1;
-        cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-        Toastify({
-            text: "O item foi adicionado ao carrinho!",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-            style: {
-                background: "#228B22", // Verde
-            },
-        }).showToast();
-
     } else {
         cart.push({
             name,
             price,
             quantity: 1,
+            image // Adiciona a imagem ao item
         });
-        updateCartModal();
-
-        Toastify({
-            text: "O item foi adicionado ao carrinho!",
-            duration: 3000,
-            close: true,
-            gravity: "top",
-            position: "right",
-            stopOnFocus: true,
-            style: {
-                background: "#228B22", // Verde
-            },
-        }).showToast();
     }
+
+    updateCartModal();
+
+    Toastify({
+        text: "O item foi adicionado ao carrinho!",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        stopOnFocus: true,
+        style: {
+            background: "#228B22", // Verde
+        },
+    }).showToast();
 
     if (navigator.vibrate) {
         navigator.vibrate(200);
@@ -103,35 +106,38 @@ function addToCart(name, price) {
     }
 }
 
+
 function updateCartModal() {
     cartItemsContainer.innerHTML = "";
     let total = 0;
 
     cart.forEach(item => {
         const cartItemElement = document.createElement("div");
-        cartItemElement.classList.add("flex", "justify-between", "mb-4", "flex-col")
+        cartItemElement.classList.add("flex", "gap-2", "mb-4");
 
         cartItemElement.innerHTML = `
-            <div class="flex items-center justify-between">
+                    <img src="${item.image}" alt="${item.name}" class="w-28 h-28 rounded-md hover:scale-110 duration-200">
+            <div class="w-full flex flex-col justify-between">
                 <div>
                     <p class="font-bold">${item.name}</p>
                     <p>Quantidade: ${item.quantity}</p>
                     <p class="font-medium mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
-            
-                <button class="remove-from-cart-btn bg-stone-600 text-white px-4 py-1 rounded" data-name="${item.name}">
+                <div class="flex justify-end mt-2">
+                    <button class="remove-from-cart-btn bg-stone-600 text-white px-4 py-1 rounded mt-2" data-name="${item.name}">
                     Remover
                 </button>
-        </div>
-        `
+                </div>
+            </div>
+
+        `;
 
         total += item.price * item.quantity;
 
-        cartItemsContainer.appendChild(cartItemElement)
+        cartItemsContainer.appendChild(cartItemElement);
+    });
 
-    })
-
-    if (cart.length >= 6) {
+    if (cart.length >= 4) {
         cartItemsContainer.classList.add("max-h-[300px]", "overflow-y-auto", "pr-2");
     } else {
         cartItemsContainer.classList.remove("max-h-[300px]", "overflow-y-auto", "pr-2");
@@ -143,16 +149,36 @@ function updateCartModal() {
     });
 
     cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
-
 }
 
 cartItemsContainer.addEventListener("click", function (event) {
-    if (event.target.classList.contains("remove-from-cart-btn")) {
-        const name = event.target.getAttribute("data-name")
+    const name = event.target.closest("button").getAttribute("data-name");
 
+    if (event.target.classList.contains("remove-from-cart-btn")) {
         removeItemCart(name);
     }
-})
+
+    if (event.target.classList.contains("increase-quantity")) {
+        const item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity += 1;
+            updateCartModal();
+        }
+    }
+
+    if (event.target.classList.contains("decrease-quantity")) {
+        const item = cart.find(item => item.name === name);
+        if (item) {
+            item.quantity -= 1;
+            if (item.quantity <= 0) {
+                removeItemCart(name);
+            } else {
+                updateCartModal();
+            }
+        }
+    }
+});
+
 
 
 function removeItemCart(name) {
@@ -247,7 +273,7 @@ checkoutBtn.addEventListener("click", function () {
         text: 'Seu pedido foi finalizado com sucesso.',
         icon: 'success',
         confirmButtonText: 'OK',
-        timer: 5000, 
+        timer: 5000,
         timerProgressBar: true,
         didOpen: () => {
             Swal.showLoading();
