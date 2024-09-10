@@ -66,7 +66,7 @@ function addToCart(name, price, image) { // Adicione o parâmetro "image"
             position: "right",
             stopOnFocus: true,
             style: {
-                background: "#FF0000", // Vermelho
+                background: "#EF4444", // Vermelho
             },
         }).showToast();
         return;
@@ -289,7 +289,7 @@ checkoutBtn.addEventListener("click", function () {
             position: "right",
             stopOnFocus: true,
             style: {
-                background: "#FF0000",
+                background: "#EF4444",
             },
         }).showToast();
 
