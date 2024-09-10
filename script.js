@@ -178,7 +178,7 @@ function addEventListeners() {
             removeItemCompletely(this.getAttribute('data-name'));
 
             if (navigator.vibrate) {
-                navigator.vibrate(500);
+                navigator.vibrate(200);
             } else {
                 console.log("Vibração não suportada neste dispositivo/navegador.");
             }
