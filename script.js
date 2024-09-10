@@ -116,20 +116,27 @@ function updateCartModal() {
         cartItemElement.classList.add("flex", "gap-2", "mb-4");
 
         cartItemElement.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" class="w-28 h-28 rounded-md hover:scale-110 duration-200">
+            <img src="${item.image}" alt="${item.name}" class="w-32 h-32 rounded-md hover:scale-110 duration-200">
             <div class="w-full flex flex-col justify-between">
                 <div>
-                    <p class="font-bold">${item.name}</p>
-                    <p>Quantidade: ${item.quantity}</p>
-                    <p class="font-medium mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                </div>
-                <div class="flex justify-end mt-2">
-                    <button class="remove-from-cart-btn bg-stone-600 text-white px-4 py-1 rounded mt-2" data-name="${item.name}">
-                    Remover
-                </button>
+                    <p class="font-bold text-lg">${item.name}</p>
+                    <p class="text-base">Quantidade: ${item.quantity}</p>
+                    <p class="font-medium text-lg mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <div class="flex items-center gap-4 mt-2">
+                        <button class="decrease-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center" data-name="${item.name}">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                        <button class="increase-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center" data-name="${item.name}">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="flex justify-end" style="margin-top: -32px">
+                        <button class="remove-item-btn text-red-600 text-2xl" data-name="${item.name}">
+                            <img src="./assets/lixeira2.svg" alt="Remover" class="w-8 h-8">
+                        </button>
+                    </div>
                 </div>
             </div>
-
         `;
 
         total += item.price * item.quantity;
@@ -137,66 +144,110 @@ function updateCartModal() {
         cartItemsContainer.appendChild(cartItemElement);
     });
 
+    // Controla a rolagem do modal
     if (cart.length >= 4) {
         cartItemsContainer.classList.add("max-h-[300px]", "overflow-y-auto", "pr-2");
     } else {
         cartItemsContainer.classList.remove("max-h-[300px]", "overflow-y-auto", "pr-2");
     }
 
+    // Atualiza o total do carrinho
     cartTotal.textContent = total.toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     });
 
+    // Atualiza o contador de itens
     cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+    // Adiciona os event listeners para os botões de remoção e quantidade
+    addEventListeners();
 }
 
-cartItemsContainer.addEventListener("click", function (event) {
-    const name = event.target.closest("button").getAttribute("data-name");
+function addEventListeners() {
+    document.querySelectorAll('.remove-item-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const trashIcon = this.querySelector('img');
 
-    if (event.target.classList.contains("remove-from-cart-btn")) {
-        removeItemCart(name);
-    }
+            trashIcon.classList.add('animate-trash');
 
-    if (event.target.classList.contains("increase-quantity")) {
-        const item = cart.find(item => item.name === name);
-        if (item) {
-            item.quantity += 1;
-            updateCartModal();
-        }
-    }
+            setTimeout(() => {
+                trashIcon.classList.remove('animate-trash');
+            }, 1000);
 
-    if (event.target.classList.contains("decrease-quantity")) {
-        const item = cart.find(item => item.name === name);
-        if (item) {
-            item.quantity -= 1;
-            if (item.quantity <= 0) {
-                removeItemCart(name);
-            } else {
-                updateCartModal();
-            }
-        }
-    }
-});
+            removeItemCompletely(this.getAttribute('data-name'));
+        });
+    });
 
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', function () {
+            // Diminui a quantidade do item
+            decreaseItemQuantity(this.getAttribute('data-name'));
+        });
+    });
 
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', function () {
+            // Aumenta a quantidade do item
+            increaseItemQuantity(this.getAttribute('data-name'));
+        });
+    });
+}
 
-function removeItemCart(name) {
-    const index = cart.findIndex(item => item.name === name)
+function decreaseItemQuantity(name) {
+    const index = cart.findIndex(item => item.name === name);
 
     if (index !== -1) {
         const item = cart[index];
 
         if (item.quantity > 1) {
             item.quantity -= 1;
-            updateCartModal();
-            return;
+        } else {
+            // Caso a quantidade seja 1 e o item for removido completamente
+            cart.splice(index, 1);
         }
-
-        cart.splice(index, 1);
         updateCartModal();
     }
 }
+
+function increaseItemQuantity(name) {
+    const index = cart.findIndex(item => item.name === name);
+
+    if (index !== -1) {
+        const item = cart[index];
+        item.quantity += 1; // Aumenta a quantidade em 1
+
+        updateCartModal();
+    }
+}
+
+function removeItemCompletely(name) {
+    const index = cart.findIndex(item => item.name === name);
+
+    if (index !== -1) {
+        cart.splice(index, 1); // Remove o item completamente
+        updateCartModal();
+    }
+}
+
+// Adiciona um event listener ao botão de lixeira
+document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+    button.addEventListener('click', function () {
+        const trashIcon = this.querySelector('img');
+
+        // Adiciona a classe de animação
+        trashIcon.classList.add('animate-trash');
+
+        // Remove a classe de animação após 1 segundo
+        setTimeout(() => {
+            trashIcon.classList.remove('animate-trash');
+        }, 1000);
+
+        // Remove o item do carrinho completamente
+        removeItemCompletely(this.getAttribute('data-name'));
+    });
+});
+
 
 addressInput.addEventListener("input", function (event) {
     let inputValue = event.target.value;
@@ -213,7 +264,7 @@ checkoutBtn.addEventListener("click", function () {
     if (!isOpen) {
 
         Toastify({
-            text: "A Hamburgueria está fechada!",
+            text: "Desculpe, estamos fechados no momento!",
             duration: 3000,
             close: true,
             gravity: "top",
