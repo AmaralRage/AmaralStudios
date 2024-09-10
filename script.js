@@ -12,14 +12,12 @@ const addressWarn = document.getElementById("address-warn")
 // Selecione todos os botões de adicionar ao carrinho
 const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 
-// Adicione um evento de clique a cada botão
 addToCartButtons.forEach(button => {
     button.addEventListener('click', function () {
         const name = this.getAttribute('data-name');
         const price = parseFloat(this.getAttribute('data-price'));
-        const image = this.getAttribute('data-image'); // Pega a URL da imagem
+        const image = this.getAttribute('data-image');
 
-        // Chama a função addToCart com os parâmetros do item
         addToCart(name, price, image);
     });
 });
@@ -248,15 +246,12 @@ function removeItemCompletely(name) {
     }
 }
 
-// Adiciona um event listener ao botão de lixeira
 document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
     button.addEventListener('click', function () {
         const trashIcon = this.querySelector('img');
 
-        // Adiciona a classe de animação
         trashIcon.classList.add('animate-trash');
 
-        // Remove a classe de animação após 1 segundo
         setTimeout(() => {
             trashIcon.classList.remove('animate-trash');
         }, 1000);
@@ -323,7 +318,7 @@ checkoutBtn.addEventListener("click", function () {
         `*Golden Burguer*\n\n` +
         `${cartItems}\n` +
         `*Total:* R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
-        `*Endereço:* ${addressInput.value}\n` + // Endereço do cliente
+        `*Endereço:* ${addressInput.value}\n` +
         `----------------------------------------------------\n` + // Linha de separação
         `Venha conhecer nosso Instagram\n` +
         `https://www.instagram.com/goldenburgerrj/\n\n`
