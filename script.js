@@ -176,6 +176,12 @@ function addEventListeners() {
             }, 1000);
 
             removeItemCompletely(this.getAttribute('data-name'));
+
+            if (navigator.vibrate) {
+                navigator.vibrate(500);
+            } else {
+                console.log("Vibração não suportada neste dispositivo/navegador.");
+            }
         });
     });
 
@@ -183,6 +189,12 @@ function addEventListeners() {
         button.addEventListener('click', function () {
             // Diminui a quantidade do item
             decreaseItemQuantity(this.getAttribute('data-name'));
+
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            } else {
+                console.log("Vibração não suportada neste dispositivo/navegador.");
+            }
         });
     });
 
@@ -190,6 +202,12 @@ function addEventListeners() {
         button.addEventListener('click', function () {
             // Aumenta a quantidade do item
             increaseItemQuantity(this.getAttribute('data-name'));
+
+            if (navigator.vibrate) {
+                navigator.vibrate(200);
+            } else {
+                console.log("Vibração não suportada neste dispositivo/navegador.");
+            }
         });
     });
 }
@@ -332,7 +350,7 @@ checkoutBtn.addEventListener("click", function () {
     })
     setTimeout(() => {
         window.open(`https://wa.me/${phone}?text=${message}`, "_blank");
-    }, 2500); // Atraso de 500 milissegundos (0.5 segundos)
+    }, 2500); // Atraso de 2500 milissegundos (2.5 segundos)
     updateCartModal();
 
 
