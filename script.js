@@ -241,10 +241,42 @@ function removeItemCompletely(name) {
     const index = cart.findIndex(item => item.name === name);
 
     if (index !== -1) {
-        cart.splice(index, 1); // Remove o item completamente
-        updateCartModal();
+        const item = cart[index];
+
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: `Deseja remover "${item.name}" do carrinho?`,
+            icon: 'warning',
+            iconColor: '#FFD700', // Define a cor do ícone de warning para amarelo
+            showCancelButton: true,
+            cancelButtonColor: '#EF4444',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#16A34A',
+            confirmButtonText: 'Remover'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Remove o item do carrinho
+                cart.splice(index, 1);
+                updateCartModal();
+                
+                Swal.fire({
+                    title: 'O item foi removido!',
+                    text: `O item "${item.name}" foi removido do carrinho.`,
+                    icon: 'success',
+                    confirmButtonColor: '#16A34A', 
+                    didRender: () => {
+                        // Modifica a cor da tipografia do botão OK para preto
+                        const confirmButton = document.querySelector('.swal2-confirm');
+                        confirmButton.style.color = '#000000';
+                    }
+                });
+            }
+        });
     }
 }
+
+
+
 
 document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
     button.addEventListener('click', function () {
@@ -348,6 +380,7 @@ checkoutBtn.addEventListener("click", function () {
     }, 2500); // Atraso de 2500 milissegundos (2.5 segundos)
     updateCartModal();
 
+    cartModal.style.display = "none"
 
 })
 
