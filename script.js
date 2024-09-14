@@ -267,7 +267,6 @@ function removeItemCompletely(name) {
                     didRender: () => {
                         // Modifica a cor da tipografia do botão OK para preto
                         const confirmButton = document.querySelector('.swal2-confirm');
-                        confirmButton.style.color = '#000000';
                     }
                 });
             }
