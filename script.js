@@ -52,7 +52,7 @@ menu.addEventListener("click", function (event) {
     }
 })
 
-function addToCart(name, price, image) { // Adicione o parâmetro "image"
+function addToCart(name, price, image) {
     const isOpen = verificaAberto();
 
     if (!isOpen) {
