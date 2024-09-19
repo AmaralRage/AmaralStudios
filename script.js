@@ -121,15 +121,15 @@ function updateCartModal() {
                     <p class="text-base">Quantidade: ${item.quantity}</p>
                     <p class="font-medium text-lg mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <div class="flex items-center gap-4 mt-2">
-                        <button class="decrease-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center" data-name="${item.name}">
+                        <button class="decrease-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center hover:scale-110 duration-200" data-name="${item.name}">
                             <i class="fa fa-minus"></i>
                         </button>
-                        <button class="increase-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center" data-name="${item.name}">
+                        <button class="increase-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center hover:scale-110 duration-200" data-name="${item.name}">
                             <i class="fa fa-plus"></i>
                         </button>
                     </div>
                     <div class="flex justify-end" style="margin-top: -32px">
-                        <button class="remove-item-btn text-red-600 text-2xl" data-name="${item.name}">
+                        <button class="remove-item-btn text-red-600 text-2xl hover:scale-110 duration-200" data-name="${item.name}">
                             <img src="./assets/lixeira2.svg" alt="Remover" class="w-8 h-8">
                         </button>
                     </div>
