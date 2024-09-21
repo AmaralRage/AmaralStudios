@@ -9,6 +9,12 @@ const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
 
+const slider = document.querySelectorAll('.slider');
+const btnPrev = document.getElementById('prev-button');
+const btnNext = document.getElementById('next-button');
+
+let currentSlide = 0;
+
 // Selecione todos os botões de adicionar ao carrinho
 const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
 
@@ -247,30 +253,30 @@ function removeItemCompletely(name) {
             title: 'Tem certeza?',
             text: `Deseja remover "${item.name}" do carrinho?`,
             icon: 'warning',
-            iconColor: '#FFD700', // Define a cor do ícone de warning para amarelo
+            iconColor: '#FFD700',
             showCancelButton: true,
             cancelButtonColor: '#EF4444',
             cancelButtonText: 'Cancelar',
             confirmButtonColor: '#16A34A',
-            confirmButtonText: 'Remover'
+            confirmButtonText: 'Remover',
+            reverseButtons: true,
+            customClass: {
+                confirmButton: 'custom-confirm-btn', // Adiciona classe personalizada ao botão
+            }
         }).then((result) => {
             if (result.isConfirmed) {
-                // Remove o item do carrinho
                 cart.splice(index, 1);
                 updateCartModal();
-                
+        
                 Swal.fire({
                     title: 'O item foi removido!',
                     text: `O item "${item.name}" foi removido do carrinho.`,
                     icon: 'success',
-                    confirmButtonColor: '#16A34A', 
-                    didRender: () => {
-                        // Modifica a cor da tipografia do botão OK para preto
-                        const confirmButton = document.querySelector('.swal2-confirm');
-                    }
+                    confirmButtonColor: '#16A34A',
                 });
             }
         });
+              
     }
 }
 
@@ -404,3 +410,36 @@ if (isOpen) {
     spanItem.classList.remove("bg-green-600")
     spanItem.classList.add("bg-red-500")
 }
+
+// funções do slide
+
+function hideSlider() {
+    slider.forEach(item => item.classList.remove('on'))
+  }
+  
+  function showSlider() {
+    slider[currentSlide].classList.add('on')
+  }
+  
+  function nextSlider() {
+    hideSlider()
+    if(currentSlide === slider.length -1) {
+      currentSlide = 0
+    } else {
+      currentSlide++
+    }
+    showSlider()
+  }
+  
+  function prevSlider() {
+    hideSlider()
+    if(currentSlide === 0) {
+      currentSlide = slider.length -1
+    } else {
+      currentSlide--
+    }
+    showSlider()
+  }
+  
+  btnNext.addEventListener('click', nextSlider)
+  btnPrev.addEventListener('click', prevSlider)
