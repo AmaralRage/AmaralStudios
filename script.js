@@ -262,6 +262,7 @@ function removeItemCompletely(name) {
             reverseButtons: true,
             customClass: {
                 confirmButton: 'custom-confirm-btn', // Adiciona classe personalizada ao botão
+                cancelButton: 'custom-confirm-btn', 
             }
         }).then((result) => {
             if (result.isConfirmed) {
@@ -273,6 +274,9 @@ function removeItemCompletely(name) {
                     text: `O item "${item.name}" foi removido do carrinho.`,
                     icon: 'success',
                     confirmButtonColor: '#16A34A',
+                    customClass: {
+                        confirmButton: 'custom-confirm-btn',
+                    }
                 });
             }
         });

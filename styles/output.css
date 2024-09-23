@@ -2757,6 +2757,16 @@ body {
   background-color: #ffd700;
 }
 
+.custom-confirm-btn {
+  transition: transform 0.2s ease;
+  /* Define a duração da animação */
+}
+
+.custom-confirm-btn:hover {
+  transform: scale(1.1);
+  /* Aplica o efeito de escala ao hover */
+}
+
 /* funções do slide */
 
 .container-slider {
