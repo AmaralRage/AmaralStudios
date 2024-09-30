@@ -287,9 +287,6 @@ function removeItemCompletely(name) {
     }
 }
 
-
-
-
 document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
     button.addEventListener('click', function () {
         const trashIcon = this.querySelector('img');
@@ -433,8 +430,10 @@ document.getElementById('address').addEventListener('input', function () {
 pickupCheckbox.addEventListener('change', function() {
     if (this.checked) {
         addressInput.value = 'Retirar no local'; // Preenche o campo de endereço
+        navigator.vibrate(200);
     } else {
         addressInput.value = ''; // Limpa o campo de endereço
+        navigator.vibrate(200);
     }
 });
 
