@@ -9,6 +9,8 @@ const cartCounter = document.getElementById("cart-count")
 const addressInput = document.getElementById("address")
 const addressWarn = document.getElementById("address-warn")
 
+const pickupCheckbox = document.getElementById('pickup-checkbox');
+
 const slider = document.querySelectorAll('.slider');
 const btnPrev = document.getElementById('prev-button');
 const btnNext = document.getElementById('next-button');
@@ -27,8 +29,6 @@ addToCartButtons.forEach(button => {
         addToCart(name, price, image);
     });
 });
-
-
 
 let cart = [];
 
@@ -90,6 +90,7 @@ function addToCart(name, price, image) {
     }
 
     updateCartModal();
+    checkCartItems();
 
     Toastify({
         text: "O item foi adicionado ao carrinho!",
@@ -194,6 +195,8 @@ function addEventListeners() {
             // Diminui a quantidade do item
             decreaseItemQuantity(this.getAttribute('data-name'));
 
+            checkCartItems();
+
             if (navigator.vibrate) {
                 navigator.vibrate(200);
             } else {
@@ -262,13 +265,13 @@ function removeItemCompletely(name) {
             reverseButtons: true,
             customClass: {
                 confirmButton: 'custom-confirm-btn', // Adiciona classe personalizada ao botão
-                cancelButton: 'custom-confirm-btn', 
+                cancelButton: 'custom-confirm-btn',
             }
         }).then((result) => {
             if (result.isConfirmed) {
                 cart.splice(index, 1);
                 updateCartModal();
-        
+
                 Swal.fire({
                     title: 'O item foi removido!',
                     text: `O item "${item.name}" foi removido do carrinho.`,
@@ -280,7 +283,7 @@ function removeItemCompletely(name) {
                 });
             }
         });
-              
+
     }
 }
 
@@ -415,35 +418,76 @@ if (isOpen) {
     spanItem.classList.add("bg-red-500")
 }
 
+document.getElementById('address').addEventListener('input', function () {
+    const addressInput = this.value.trim();
+    const pickupInfo = document.getElementById('pickup-info');
+
+    if (addressInput.length > 0) {
+        pickupInfo.classList.add('hidden'); // Esconde o texto se o input tiver conteúdo
+    } else {
+        pickupInfo.classList.remove('hidden'); // Mostra o texto se o input estiver vazio
+    }
+});
+
+// Evento para o checkbox
+pickupCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        addressInput.value = 'Retirar no local'; // Preenche o campo de endereço
+    } else {
+        addressInput.value = ''; // Limpa o campo de endereço
+    }
+});
+
+// Verificação de campo de endereço preenchido
+document.getElementById('address').addEventListener('input', function () {
+    const addressInput = this.value.trim();
+    const pickupCheckbox = document.getElementById('pickup-checkbox');
+
+    if (addressInput.length > 0 && addressInput !== 'Retirar no local') {
+        pickupCheckbox.checked = false; // Desmarca o checkbox se o endereço for diferente de "Retirar no local"
+    }
+});
+
+// Verificação de carrinho vazio
+function checkCartItems() {
+    const cartItems = document.getElementById('cart-items').children.length;
+    const pickupCheckbox = document.getElementById('pickup-checkbox');
+
+    if (cartItems === 0) {
+        pickupCheckbox.checked = false; // Desmarca o checkbox se o carrinho estiver vazio
+        addressInput.value = ''; // Limpa o campo de endereço
+    }
+}
+
 // funções do slide
 
 function hideSlider() {
     slider.forEach(item => item.classList.remove('on'))
-  }
-  
-  function showSlider() {
+}
+
+function showSlider() {
     slider[currentSlide].classList.add('on')
-  }
-  
-  function nextSlider() {
+}
+
+function nextSlider() {
     hideSlider()
-    if(currentSlide === slider.length -1) {
-      currentSlide = 0
+    if (currentSlide === slider.length - 1) {
+        currentSlide = 0
     } else {
-      currentSlide++
+        currentSlide++
     }
     showSlider()
-  }
-  
-  function prevSlider() {
+}
+
+function prevSlider() {
     hideSlider()
-    if(currentSlide === 0) {
-      currentSlide = slider.length -1
+    if (currentSlide === 0) {
+        currentSlide = slider.length - 1
     } else {
-      currentSlide--
+        currentSlide--
     }
     showSlider()
-  }
-  
-  btnNext.addEventListener('click', nextSlider)
-  btnPrev.addEventListener('click', prevSlider)
+}
+
+btnNext.addEventListener('click', nextSlider)
+btnPrev.addEventListener('click', prevSlider)

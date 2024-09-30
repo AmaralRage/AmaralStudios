@@ -35,7 +35,7 @@
 
     <!--HEADER-->
 
-    <header class="w-full h-[420px] bg-zinc-900 bg-home bg-cover bg-center">
+    <header class="w-full h-[420px] bg-zinc-900 bg-cover bg-center bg-header">
         <div class="w-full h-full flex flex-col justify-center items-center">
             <img src="./assets/logo.png" alt="Logo Rei Midas"
                 class="w-32 h-32 rounded-full shadow-lg hover:scale-110 duration-200">
@@ -52,8 +52,9 @@
         </div>
     </header>
 
+
     <!-- SLIDE DE PROMOÇÕES -->
-<!-- 
+    <!-- 
     <div class="container-slider">
         <button id="prev-button"><img src="./assets/arrow.png" alt="prev-button"></button>
         <div class="container-images">
@@ -346,8 +347,7 @@
                 <div class="w-full">
                     <p class="font-bold">Molho de Bacon</p>
                     <p class="text-sm">200 gramas de bacon, 1 caixa de creme de leite, 100 gramas de queijo parmesão
-                        ralado, 1 cebola, 2 dentes de alho, salsinha picada,
-                        pimenta do reino e sal</p>
+                        ralado, 1 cebola, 2 dentes de alho</p>
 
                     <div class="flex items-center gap-2 justify-between mt-2">
                         <p class="font-bold text-lg">R$ 2,00</p>
@@ -553,17 +553,23 @@
             <p class="font-bold mt-4">Endereço de Entrega:</p>
             <input type="text" placeholder="Digite seu endereço completo..." id="address"
                 class="w-full border-2 p-1 rounded my-1" />
-                <!-- <p class="font-bold mt-4">Informar no endereço caso vá retirar no local</p> -->
+
+            <div class="flex items-center mt-4">
+                <input type="checkbox" id="pickup-checkbox" class="custom-checkbox mr-2">
+                <label for="pickup-checkbox" class="font-medium">Retirar no local</label>
+            </div>
 
             <p class="text-red-500 hidden" id="address-warn">Digite seu endereço corretamente!</p>
 
             <div class="flex items-center justify-between mt-5 w-full">
-                <button id="close-modal-btn" class="bg-red-500 text-white px-4 py-1 rounded hover:scale-110 duration-200">Fechar</button>
-                <button id="checkout-btn" class="bg-green-500 text-white px-4 py-1 rounded hover:scale-110 duration-200">Finalizar pedido</button>
+                <button id="close-modal-btn"
+                    class="bg-red-500 text-white px-4 py-1 rounded hover:scale-110 duration-200">Fechar</button>
+                <button id="checkout-btn"
+                    class="bg-green-500 text-white px-4 py-1 rounded hover:scale-110 duration-200">Finalizar
+                    pedido</button>
             </div>
         </div>
     </div>
-
 
 
     <!--FOOTER-->
