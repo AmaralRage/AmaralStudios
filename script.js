@@ -503,5 +503,5 @@ function prevSlider() {
     showSlider()
 }
 
-btnNext.addEventListener('click', nextSlider)
-btnPrev.addEventListener('click', prevSlider)
+// btnNext.addEventListener('click', nextSlider)
+// btnPrev.addEventListener('click', prevSlider)
