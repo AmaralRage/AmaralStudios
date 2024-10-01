@@ -333,13 +333,27 @@ checkoutBtn.addEventListener("click", function () {
     }
 
 
-    if (cart.length === 0)
-        return;
+    if (cart.length === 0) {
+        Toastify({
+            text: "Seu carrinho está vazio!",
+            duration: 3000,
+            close: true,
+            gravity: "top",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#EF4444", // Cor de erro similar ao alerta de loja fechada
+            },
+        }).showToast();
+        return; // Impede o usuário de finalizar com carrinho vazio
+    }
+    
     if (addressInput.value === "") {
-        addressWarn.classList.remove("hidden")
-        addressInput.classList.add("border-red-500")
+        addressWarn.classList.remove("hidden");
+        addressInput.classList.add("border-red-500");
         return;
     }
+    
 
     let total = 0;
     const cartItems = cart.map((item, index) => {
@@ -390,7 +404,8 @@ checkoutBtn.addEventListener("click", function () {
     updateCartModal();
 
     cartModal.style.display = "none"
-
+    cart = [];
+    cartCounter.innerHTML = 0;
 })
 
 function verificaAberto() {
