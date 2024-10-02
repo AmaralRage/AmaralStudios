@@ -8,9 +8,10 @@ body {
 }
 
 .bg-header {
-    background-image: url('https://png.pngtree.com/background/20230413/original/pngtree-food-burger-juicy-and-delicious-background-picture-image_2422702.jpg'); /* Substitua pelo caminho da sua imagem */
-    background-size: cover;
-    background-position: center;
+    background-image: url('/assets/banner.png');
+    background-size: 100% 125%; /* Aumenta a largura para 140% e mantém a altura em 120% */
+    background-position: center center; /* Mantém a imagem centralizada */
+    background-repeat: no-repeat;
     position: relative;
 }
 
