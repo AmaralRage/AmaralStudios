@@ -413,7 +413,7 @@ function verificaAberto() {
     const diaDaSemana = data.getDay();
     const hora = data.getHours();
 
-    if (diaDaSemana === 4) {
+    if (diaDaSemana === 2) {
         return false;
     }
     return (hora >= 18 && hora < 24) || (hora >= 0 && hora < 1);
