@@ -381,7 +381,6 @@ checkoutBtn.addEventListener("click", function () {
 
     const phone = "+5521983837957";
 
-    // Desabilitar o botão de checkout usando o ID
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
         checkoutBtn.setAttribute('disabled', 'disabled');
