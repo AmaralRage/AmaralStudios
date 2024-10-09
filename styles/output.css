@@ -675,14 +675,6 @@ video {
   top: 0px;
 }
 
-.right-4 {
-  right: 1rem;
-}
-
-.top-4 {
-  top: 1rem;
-}
-
 .isolate {
   isolation: isolate;
 }
@@ -2246,11 +2238,6 @@ video {
   line-height: 1.25rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
 .font-bold {
   font-weight: 700;
 }
@@ -2737,8 +2724,8 @@ body {
 }
 
 .bg-header {
-  background-image: url('/assets/banner.png');
-  background-size: 100% 125%;
+  background-image: url('https://imageproxy.wolt.com/venue/661beb0f7455da2b6abe815b/0a157196-fb06-11ee-95cd-b6821f757d66_661beb0f7455da2b6abe815b_list');
+  background-size: 100%;
   /* Aumenta a largura para 140% e mantém a altura em 120% */
   background-position: center center;
   /* Mantém a imagem centralizada */
@@ -3012,11 +2999,6 @@ body {
   font-weight: 700;
 }
 
-.hover\:text-gray-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(209 213 219 / var(--tw-text-opacity));
-}
-
 .before\:hover\:text-center:hover::before {
   content: var(--tw-content);
   text-align: center;
@@ -3057,6 +3039,11 @@ body {
   .md\:text-2xl {
     font-size: 1.5rem;
     line-height: 2rem;
+  }
+
+  .md\:text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 }
 
