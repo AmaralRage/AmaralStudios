@@ -111,7 +111,6 @@ function addToCart(name, price, image) {
     }
 }
 
-
 function updateCartModal() {
     cartItemsContainer.innerHTML = "";
     let total = 0;
@@ -164,8 +163,6 @@ function updateCartModal() {
 
     // Atualiza o contador de itens
     cartCounter.innerHTML = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-    // Adiciona os event listeners para os botões de remoção e quantidade
     addEventListeners();
 }
 
