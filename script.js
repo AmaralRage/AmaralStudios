@@ -376,7 +376,7 @@ checkoutBtn.addEventListener("click", function () {
         `https://www.instagram.com/goldenburgerrj/\n\n`
     );
 
-    const phone = "+5521983837957";
+    const phone = "+5521969647059";
 
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
