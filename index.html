@@ -709,21 +709,29 @@
     <!--FIM DO MENU-->
 
     <div class="bg-black/50 w-full h-full fixed top-0 left-0 z-[99] items-center justify-center hidden" id="cart-modal">
-        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px]">
+        <div class="bg-white p-5 rounded-md min-w-[90%] md:min-w-[600px] relative">
+            <!-- Botão "X" para fechar o modal -->
+            <button id="close-modal-x" class="absolute top-3 right-3 text-gray-600 hover:text-black text-2xl font-bold 
+         transition-transform duration-200 ease-in-out hover:scale-110 cursor-pointer">
+                &times;
+            </button>
+
             <h2 class="text-center font-bold text-2xl mb-2">Meu Carrinho</h2>
+
             <div id="cart-items" class="flex justify-between mb-2 flex-col max-h-[300px] overflow-y-auto pr-6"></div>
 
             <p class="font-bold">Total: <span id="cart-total">0,00</span></p>
+
             <p class="font-bold mt-4">Endereço de Entrega:</p>
             <input type="text" placeholder="Digite seu endereço completo..." id="address"
                 class="w-full border-2 p-1 rounded my-1" />
 
             <p class="text-red-500 hidden" id="address-warn">Digite seu endereço corretamente!</p>
+
             <div class="flex items-center mt-4">
                 <input type="checkbox" id="pickup-checkbox" class="custom-checkbox mr-2">
                 <label for="pickup-checkbox" class="font-medium">Retirar no local</label>
             </div>
-
 
             <div class="flex items-center justify-between mt-5 w-full">
                 <button id="close-modal-btn"
@@ -734,6 +742,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!--FOOTER-->

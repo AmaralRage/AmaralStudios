@@ -1,6 +1,7 @@
 const menu = document.getElementById("menu")
 const cartBtn = document.getElementById("cart-btn")
 const cartModal = document.getElementById("cart-modal")
+const closeX = document.getElementById("close-modal-x");
 const cartItemsContainer = document.getElementById("cart-items")
 const cartTotal = document.getElementById("cart-total")
 const checkoutBtn = document.getElementById("checkout-btn")
@@ -44,6 +45,11 @@ cartModal.addEventListener("click", function (event) {
         cartModal.style.display = "none"
     }
 })
+
+// Fechar modal ao clicar no botão "X"
+closeX.addEventListener("click", function() {
+    cartModal.style.display = "none";
+  });
 
 closeModalBtn.addEventListener("click", function () {
     cartModal.style.display = "none"
