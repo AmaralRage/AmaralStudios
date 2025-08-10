@@ -373,16 +373,16 @@ checkoutBtn.addEventListener("click", function () {
     }).join("\n");
 
     const message = encodeURIComponent(
-        `*Golden Burguer*\n\n` +
+        `*Maná Burger*\n\n` +
         `${cartItems}\n` +
         `*Total:* R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n\n` +
         `*Endereço:* ${addressInput.value}\n` +
         `----------------------------------------------------\n` + // Linha de separação
         `Venha conhecer nosso Instagram\n` +
-        `https://www.instagram.com/goldenburgerrj/\n\n`
+        `https://www.instagram.com/mana.burgerr/\n\n`
     );
 
-    const phone = "+5521969647059";
+    const phone = "+5521983837957";
 
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) {
