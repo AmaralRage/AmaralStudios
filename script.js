@@ -418,7 +418,7 @@ function verificaAberto() {
     if (diaDaSemana === 2) {
         return false;
     }
-    return (hora >= 18 && hora < 24) || (hora >= 0 && hora < 1);
+    return (hora >= 18 && hora < 24) || (hora >= 0 && hora < 2);
 }
 
 const spanItem = document.getElementById("data-span")
