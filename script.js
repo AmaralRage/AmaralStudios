@@ -130,7 +130,7 @@ function updateCartModal() {
             <div class="w-full flex flex-col justify-between">
                 <div>
                     <p class="font-bold text-lg">${item.name}</p>
-                    <p class="text-base">Quantidade: ${item.quantity}</p>
+                    <p class="text-base">Unidades: ${item.quantity}</p>
                     <p class="font-medium text-lg mt-2">R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     <div class="flex items-center gap-4 mt-2">
                         <button class="decrease-quantity text-white bg-stone-800 rounded-md w-10 h-8 flex items-center justify-center hover:scale-110 duration-200" data-name="${item.name}">
@@ -195,7 +195,7 @@ function addEventListeners() {
 
     document.querySelectorAll('.decrease-quantity').forEach(button => {
         button.addEventListener('click', function () {
-            // Diminui a quantidade do item
+            // Diminui a Unidades do item
             decreaseItemQuantity(this.getAttribute('data-name'));
 
             checkCartItems();
@@ -210,7 +210,7 @@ function addEventListeners() {
 
     document.querySelectorAll('.increase-quantity').forEach(button => {
         button.addEventListener('click', function () {
-            // Aumenta a quantidade do item
+            // Aumenta a Unidades do item
             increaseItemQuantity(this.getAttribute('data-name'));
 
             if (navigator.vibrate) {
@@ -231,7 +231,7 @@ function decreaseItemQuantity(name) {
         if (item.quantity > 1) {
             item.quantity -= 1;
         } else {
-            // Caso a quantidade seja 1 e o item for removido completamente
+            // Caso a Unidades seja 1 e o item for removido completamente
             cart.splice(index, 1);
         }
         updateCartModal();
@@ -243,7 +243,7 @@ function increaseItemQuantity(name) {
 
     if (index !== -1) {
         const item = cart[index];
-        item.quantity += 1; // Aumenta a quantidade em 1
+        item.quantity += 1; // Aumenta a Unidades em 1
 
         updateCartModal();
     }
@@ -366,7 +366,7 @@ checkoutBtn.addEventListener("click", function () {
         return (
             `${item.name}\n` +
             `(R$ ${item.price.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })})\n` +
-            `Quantidade: ${item.quantity}\n` +
+            `Unidades: ${item.quantity}\n` +
             `R$ ${itemTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\n` +
             `\n`
         );
