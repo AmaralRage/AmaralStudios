@@ -47,9 +47,9 @@ cartModal.addEventListener("click", function (event) {
 })
 
 // Fechar modal ao clicar no botão "X"
-closeX.addEventListener("click", function() {
+closeX.addEventListener("click", function () {
     cartModal.style.display = "none";
-  });
+});
 
 closeModalBtn.addEventListener("click", function () {
     cartModal.style.display = "none"
@@ -350,13 +350,13 @@ checkoutBtn.addEventListener("click", function () {
         }).showToast();
         return; // Impede o usuário de finalizar com carrinho vazio
     }
-    
+
     if (addressInput.value === "") {
         addressWarn.classList.remove("hidden");
         addressInput.classList.add("border-red-500");
         return;
     }
-    
+
 
     let total = 0;
     const cartItems = cart.map((item, index) => {
@@ -444,7 +444,7 @@ document.getElementById('address').addEventListener('input', function () {
 });
 
 // Evento para o checkbox
-pickupCheckbox.addEventListener('change', function() {
+pickupCheckbox.addEventListener('change', function () {
     if (this.checked) {
         addressInput.value = 'Retirar no local'; // Preenche o campo de endereço
         navigator.vibrate(200);
@@ -504,6 +504,63 @@ function prevSlider() {
     }
     showSlider()
 }
+
+// ANIMAÇÃO ABAIXO
+
+const canvas = document.getElementById('background-canvas');
+const ctx = canvas.getContext('2d');
+
+let width, height;
+function resize() {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+const hamburgerImg = new Image();
+hamburgerImg.src = './assets/hamburguer.png'; // caminho da imagem do hambúrguer pequena
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.speedY = 1 + Math.random() * 2;
+        this.size = 30 + Math.random() * 20;
+    }
+    update() {
+        this.y += this.speedY;
+        if (this.y > height) {
+            this.y = -this.size;
+            this.x = Math.random() * width;
+        }
+    }
+    draw() {
+        ctx.drawImage(hamburgerImg, this.x, this.y, this.size, this.size);
+    }
+}
+
+const particles = [];
+const particleCount = 30;
+
+for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+}
+
+function animate() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animate);
+}
+
+hamburgerImg.onload = () => {
+    animate();
+};
+
+// FIM DA ANIMAÇÃO
 
 // btnNext.addEventListener('click', nextSlider)
 // btnPrev.addEventListener('click', prevSlider)
